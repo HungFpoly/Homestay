@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 //===== db connection =====
 
 //Thiết lập một kết nối mongoose mặc định
-var mongoDB =  process.env.MONGOURLocal || 'mongodb://localhost:27017/marketplace';
+var mongoDB =  process.env.MONGOURLocal || 'mongodb+srv://hung:hung123@cluster0.upovm.mongodb.net/Booking';
 const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
