@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var Cate = require('../model/Cate.js');
+var Place = require('../model/place');
 
 function bodauTiengViet(str) {
     str = str.toLowerCase();
@@ -19,75 +19,75 @@ function bodauTiengViet(str) {
 
 /* GET home page. */
 router.get('/',function(req, res, next) {
-  res.redirect('/admin/cate/danh-sach.html'); 
+  res.redirect('/admin/place/danh-sach.html'); 
 });
 
 router.get('/danh-sach.html', function(req, res, next) {
-	 Cate.find().then(function(data){
-		res.render('admin/cate/danhsach', {data: data});
+	 Place.find().then(function(data){
+		res.render('admin/place/danhsach', {data: data});
 	});
   	
 });
 
-router.get('/them-cate.html',function(req, res, next) {
-  res.render('admin/cate/them', { errors: null});
+router.get('/them-place.html',function(req, res, next) {
+  res.render('admin/place/them', { errors: null});
 });
 
 
-router.post('/them-cate.html', function(req, res, next) {
+router.post('/them-place.html', function(req, res, next) {
   //res.render('admin/cate/them');
   req.checkBody('name', 'Giá Trị không được rổng').notEmpty();
   req.checkBody('name', 'Name 5 đến 32 ký tự').isLength({min:3, max:32});
   var errors = req.validationErrors();
 	if (errors) {
-	  res.render('admin/cate/them',{errors : errors}); 
+	  res.render('admin/place/them',{errors : errors}); 
 	}
 
-	var cate = new Cate({
+	var place = new Place({
 		name 			: req.body.name,
 		nameKhongDau 	: bodauTiengViet(req.body.name)
 	});
 
-	cate.save().then(function(){
+	place.save().then(function(){
 		req.flash('success_msg', 'Đã Thêm Thành Công');
-		res.redirect('/admin/cate/them-cate.html'); 
+		res.redirect('/admin/place/them-place.html'); 
 	});
 
   
 });
 
 
-router.get('/:id/sua-cate.html', function(req, res, next) {
-	Cate.findById(req.params.id, function(err, data){
-		res.render('admin/cate/sua',{ errors: null, data: data});
+router.get('/:id/sua-place.html', function(req, res, next) {
+	Place.findById(req.params.id, function(err, data){
+		res.render('admin/place/sua',{ errors: null, data: data});
 	});	
 });
 
-router.post('/:id/sua-cate.html',  function(req, res, next) {
+router.post('/:id/sua-place.html',  function(req, res, next) {
 	req.checkBody('name', 'Giá Trị không được rổng').notEmpty();
   	req.checkBody('name', 'Name 5 đến 32 ký tự').isLength({min:3, max:32});
   	var errors = req.validationErrors();
   	if(errors){
-  		Cate.findById(req.params.id, function(err, data){
-			res.render('admin/cate/sua',{ errors: errors, data: data});
+  		Place.findById(req.params.id, function(err, data){
+			res.render('admin/place/sua',{ errors: errors, data: data});
 		});	
   	}else{
-  		Cate.findById(req.params.id, function(err, data){
+  		Place.findById(req.params.id, function(err, data){
 			data.name 			= req.body.name;
 			data.nameKhongDau 	= bodauTiengViet(req.body.name);
 			data.save();
 			req.flash('success_msg', 'Đã Sửa Thành Công');
-			res.redirect('/admin/cate/'+req.params.id+'/sua-cate.html');
+			res.redirect('/admin/place/'+req.params.id+'/sua-place.html');
 		});
   	}
 
 });
 
-router.get('/:id/xoa-cate.html',function(req, res, next) {
+router.get('/:id/xoa-place.html',function(req, res, next) {
 	
-	Cate.findById(req.params.id).remove(function() { 
+	Place.findById(req.params.id).remove(function() { 
 		req.flash('success_msg', 'Đã Xoá Thành Công');
-		res.redirect('/admin/cate/danh-sach.html');
+		res.redirect('/admin/place/danh-sach.html');
 	});
 });
 

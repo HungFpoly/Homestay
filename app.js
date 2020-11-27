@@ -13,9 +13,10 @@ var bcrypt = require('bcryptjs');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var admin = require('./routes/admin');
-var cate = require('./routes/cate');
+var place = require('./routes/place');
 var product = require('./routes/product');
 var cart = require('./routes/cart');
+var kindOfRoom = require('./routes/kind_Of_Room');
 
 var salt = bcrypt.genSaltSync(10);
 var hash = bcrypt.hashSync("B4c0/\/", salt);
@@ -85,9 +86,10 @@ app.use(function(req, res, next){
 app.use('/', index);
 app.use('/users', users);
 app.use('/admin', admin);
-app.use('/admin/cate', cate);
+app.use('/admin/place', place);
 app.use('/admin/product', product);
 app.use('/admin/cart', cart);
+app.use('/admin/kindOfRoom', kindOfRoom );
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

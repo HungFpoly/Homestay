@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var Cate = require('../model/Cate.js');
+var Place = require('../model/place');
 
 var User = require('../model/User.js');
 

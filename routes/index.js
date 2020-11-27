@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var Cate = require('../model/Cate.js');
+var Place = require('../model/place');
 var Product = require('../model/Product.js');
 var GioHang = require('../model/giohang.js');
 var Cart = require('../model/Cart.js');
@@ -18,8 +18,8 @@ var countJson = function(json){
 /* GET home page. */
 router.get('/', function (req, res) {
 	Product.find().then(function(product){
-		Cate.find().then(function(cate){
-			res.render('site/page/index',{product: product, cate: cate});
+		Place.find().then(function(place){
+			res.render('site/page/index',{product: product, place: place});
 		});
 	});
    
@@ -28,8 +28,8 @@ router.get('/', function (req, res) {
 router.get('/cate/:name.:id.html', function (req, res) {
 
 	Product.find({cateId: req.params.id}, function(err, data){
-		Cate.find().then(function(cate){
-			res.render('site/page/cate',{product: data, cate: cate});
+		Place.find().then(function(place){
+			res.render('site/page/cate',{product: data, place: place});
 		});
 	});
 });
@@ -86,7 +86,7 @@ router.get('/dat-hang.html', function (req, res) {
 
 
 router.post('/menu', function (req, res) {
- 	Cate.find().then(function(data){
+ 	Place.find().then(function(data){
  		 res.json(data);
  	});
 });

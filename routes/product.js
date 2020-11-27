@@ -28,7 +28,7 @@ function bodauTiengViet(str) {
     return str;
 }
 
-var Cate = require('../model/Cate.js');
+var Place = require('../model/place');
 var Product = require('../model/Product.js');
 
 /* GET home page. */
@@ -44,8 +44,8 @@ router.get('/danh-sach.html',function (req, res) {
 });
 
 router.get('/them-product.html',function (req, res) {
-	Cate.find().then(function(cate){
-		res.render('admin/product/them',{errors: null, cate: cate});
+	Place.find().then(function(place){
+		res.render('admin/product/them',{errors: null, place: place});
 	});
 });
 
@@ -63,18 +63,20 @@ router.post('/them-product.html',upload.single('hinh'), function (req, res) {
 			fs.unlink(file, function(e){
 				if(e) throw e;
 			});
-  		Cate.find().then(function(cate){
-			res.render('admin/product/them',{errors: errors, cate: cate});
+  		Place.find().then(function(place){
+			res.render('admin/product/them',{errors: errors, place: place});
 		});
+		
 	}else{
 		var pro = new Product({
 			name 			: req.body.name,
 			nameKhongDau 	: bodauTiengViet(req.body.name),
 			img 			: req.file.filename,
-			cateId 			: req.body.cate,
+			placeId 			: req.body.cate,
 			des 			: req.body.des,
 			price 			: req.body.gia,
-			st 				: 0
+			st 				: 0,
+            kindOfRoomId  : req.body.KindOfRoom 
 		});
 
 		pro.save().then(function(){
@@ -86,9 +88,11 @@ router.post('/them-product.html',upload.single('hinh'), function (req, res) {
 
 router.get('/:id/sua-product.html', function (req, res) {
 	Product.findById(req.params.id).then(function(data){
-		Cate.find().then(function(cate){
-			res.render('admin/product/sua',{errors: null, cate: cate, product: data});
+		Place.find().then(function(place){
+			res.render('admin/product/sua',{errors: null, place: place, product: data});
+
 		});
+		
 	});
 	
 });
@@ -109,9 +113,11 @@ router.post('/:id/sua-product.html',  upload.single('hinh'), function (req, res)
 		 });
 
   		Product.findById(req.params.id).then(function(data){
-			Cate.find().then(function(cate){
-				res.render('admin/product/sua',{errors: errors, cate: cate, product: data});
+			Place.find().then(function(place){
+				res.render('admin/product/sua',{errors: errors, place: place, product: data});
+			
 			});
+			
 		});
 	}else{
 		Product.findOne({ _id: req.params.id},  function(err, data){
@@ -123,10 +129,11 @@ router.post('/:id/sua-product.html',  upload.single('hinh'), function (req, res)
 			data.name 			= req.body.name;
 			data.nameKhongDau 	= bodauTiengViet(req.body.name);
 			data.img 			= req.file.filename;
-			data.cateId 		= req.body.cate;
+			data.placeId 		= req.body.place;
 			data.des 			= req.body.des;
 			data.price 			= req.body.gia;
 			data.st 			= '0';
+			data.kindOfRoomId   = req.body.KindOfRoom ;
 
 			data.save();
 				req.flash('success_msg', 'Đã Sửa Thành Công');

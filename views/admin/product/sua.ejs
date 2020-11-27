@@ -81,9 +81,9 @@
                                             <label class="form-label" for="field-120334">Thể Loại</label>
                                             <span class="desc"></span>
                                             <div class="controls">
-                                                <select class="form-control" id="cate" name="cate">
-                                                    <% cate.forEach(function(item){ %> 
-                                                        <option value="<%= item._id%>" <%= (item._id == product.cateId) ? 'selected=\"selected\"' : ''%> ><%= item.name%></option>
+                                                <select class="form-control" id="place" name="place">
+                                                    <% place.forEach(function(item){ %> 
+                                                        <option value="<%= item._id%>" <%= (item._id == product.placeId) ? 'selected=\"selected\"' : ''%> ><%= item.name%></option>
                                                     <%})%>
                                                 </select>
                                             </div>

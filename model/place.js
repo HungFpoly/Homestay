@@ -2,10 +2,10 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 mongoose.Promise = global.Promise;
 
-var Cate = new Schema({
+var Place = new Schema({
   name:  String,
   nameKhongDau: String
 
-},{collection : 'cate'});
+},{collection : 'place'});
 
-module.exports = mongoose.model('Cate', Cate);
+module.exports = mongoose.model('Place', Place);
