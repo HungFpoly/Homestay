@@ -25,18 +25,18 @@ router.get('/', function (req, res) {
    
 });
 
-router.get('/cate/:name.:id.html', function (req, res) {
+router.get('/place/:name.:id.html', function (req, res) {
 
-	Product.find({cateId: req.params.id}, function(err, data){
+	Product.find({placeId: req.params.id}, function(err, data){
 		Place.find().then(function(place){
-			res.render('site/page/cate',{product: data, place: place});
+			res.render('site/page/place',{product: data, place: place});
 		});
 	});
 });
 
-router.get('/chi-tiet/:name.:id.:cate.html', function (req, res) {
+router.get('/chi-tiet/:name.:id.:place.html', function (req, res) {
 	Product.findById(req.params.id).then(function(data){
-		Product.find({cateId: data.cateId, _id: {$ne: data._id}}).limit(4).then(function(pro){
+		Product.find({placeId: data.cateId, _id: {$ne: data._id}}).limit(4).then(function(pro){
 			res.render('site/page/chitiet', {data: data, product: pro});
 		});
 	});
