@@ -72,11 +72,10 @@ router.post('/them-product.html',upload.single('hinh'), function (req, res) {
 			name 			: req.body.name,
 			nameKhongDau 	: bodauTiengViet(req.body.name),
 			img 			: req.file.filename,
-			placeId 			: req.body.cate,
+			placeId 		: req.body.place,
 			des 			: req.body.des,
 			price 			: req.body.gia,
 			st 				: 0,
-            kindOfRoomId  : req.body.KindOfRoom 
 		});
 
 		pro.save().then(function(){
@@ -133,7 +132,6 @@ router.post('/:id/sua-product.html',  upload.single('hinh'), function (req, res)
 			data.des 			= req.body.des;
 			data.price 			= req.body.gia;
 			data.st 			= '0';
-			data.kindOfRoomId   = req.body.KindOfRoom ;
 
 			data.save();
 				req.flash('success_msg', 'Đã Sửa Thành Công');

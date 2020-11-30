@@ -2,6 +2,8 @@
 <!-- Header End -->
 
 <div id="maincontainer">
+<p class="lead mb-3">Welcome</p>
+<a href="/users/logout" class="btn btn-secondary">Logout</a>
   <!-- Slider Start-->
   <section class="slider">
     <div class="container">
@@ -58,7 +60,7 @@
           <h1 class="heading1"><span class="maintext"> <%= ca.name%> </span><span class="subtext"> See Our Most featured Products</span></h1>
           
           <ul class="thumbnails">
-            <%  product.forEach(function(pro){ if(id < 4) { if(pro.placeId == ca._id){ id ++ ; %>
+            <% product.forEach(function(pro){ if(id < 4) { if(pro.placeId == ca._id){ id ++ ; %>
 
                   <li class="span3">
                     <a class="prdocutname" href="product.html"> <%= pro.name %> </a>

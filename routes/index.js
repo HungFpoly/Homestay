@@ -6,6 +6,8 @@ var Product = require('../model/Product.js');
 var GioHang = require('../model/giohang.js');
 var Cart = require('../model/Cart.js');
 
+const { ensureAuthenticated, forwardAuthenticated } = require('../middleware/auth');
+
 var countJson = function(json){
 	var count = 0;
 	for(var id in json){
@@ -14,9 +16,10 @@ var countJson = function(json){
 
 	return count;
 }
-
+// Welcome Page
+// router.get('/', forwardAuthenticated, (req, res) => res.render('welcome'));
 /* GET home page. */
-router.get('/', function (req, res) {
+router.get('/', ensureAuthenticated, function (req, res) {
 	Product.find().then(function(product){
 		Place.find().then(function(place){
 			res.render('site/page/index',{product: product, place: place});
