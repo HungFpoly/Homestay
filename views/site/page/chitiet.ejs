@@ -1,85 +1,235 @@
-<% include ../layout/header.ejs %>
 <!-- Header End -->
+<% include ../layout/header.ejs %>
 
-<div id="maincontainer">
-  <section id="product">
-    <div class="container">      
-      <!-- Product Details-->
-      <div class="row">
-       <!-- Left Image-->
-        <div class="span5">
-          <ul class="thumbnails mainimage">
-            <li class="span5">
-              <a  rel="position: 'inside' , showTitle: false, adjustX:-4, adjustY:-4" class="thumbnail cloud-zoom" href="upload/<%= data.img%>">
-                <img src="upload/<%= data.img%>" alt="" title="">
-              </a>
-            </li>
-       
-          </ul>
-       
-        </div>
-         <!-- Right Details-->
-        <div class="span7">
-          <div class="row">
-            <div class="span7">
-              <h1 class="productname"><span class="bgnone"><%= data.name%></span></h1>
-              <div class="productprice">
-                <div class="productpageprice">
-                  <span class="spiral"></span><%= data.price%></div>
-              </div>
-              <ul class="productpagecart">
-                <li><a class="cart" href="/add-cart.<%= data._id %>">Add to Cart</a>
-                </li>
-              </ul>
-         <!-- Product Description tab & comments-->
-         <div class="productdesc">
-                <ul class="nav nav-tabs" id="myTab">
-                  <li class="active"><a href="#description">Description</a>
-                  </li>
-              
-                </ul>
-                <div class="tab-content">
-                  <div class="tab-pane active" id="description">
-                    <h2>Chi Tiết Sản Phẩm</h2>
-                    <%= data.des%>
-                  </div>
+<br>
+<br>
+<main class="container">
 
+
+
+  <div class="left-column">
+    <a rel="position: 'inside' , showTitle: false, adjustX:-4, adjustY:-4" class="thumbnail cloud-zoom"
+      href="upload/<%= data.img%>">
+      <img src="upload/<%= data.img%>" alt="" title="">
+    </a>
+  </div>
+
+
+  <!-- Right Column -->
+  <div class="right-column">
+
+    <!-- Product Description -->
+    <div class="product-description">
+      <span>Homestay</span>
+      <h1><%= data.name%> </h1>
+      <br>
+      <p><%= data.des%></p>
+    </div>
+    <br>
+
+    <!-- Product Configuration -->
+    <div class="product-configuration">
+
+
+      <div class="product-price">
+        <span><%= data.price%>$</span>
+        <a class="cart-btn" href="/add-cart.<%= data._id %>">Book Now</a>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+
+
+<br>
+<br>
+<br>
+
+<section id="related" class="row">
+
+  <div class="container">
+    <h3><span class="">Sản Phẩm Khác</span></h3>
+
+
+    <div class="latest-products">
+      <div class="container">
+        <div class="row">
+          <%  product.forEach(function(pro){  %>
+          <div class="col-md-4">
+
+            <div class="product-item">
+              <div class="thumbnail">
+                <a href="/chi-tiet/<%= pro.nameKhongDau%>.<%= pro._id%>.<%= pro.placeId%>.html"><img
+                    src="upload/<%= pro.img %>" alt="" height="300" width="300"></a>
+
+                <h4 class="cangiua"><%= pro.name %></h4>
+                <div class="down-content">
+                  </a>
+                  <h6>$<%= pro.price %></h6>
+                  <p><%= pro.des %></p>
+                  <a href="/add-cart.<%= pro._id %>" class="">BOOK NOW
+                  </a>
+                  <ul class="stars">
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                  </ul>
                 </div>
               </div>
             </div>
+
           </div>
+          <% })%>
         </div>
       </div>
     </div>
-  </section>
-  <!--  Related Products-->
-  <section id="related" class="row">
-    <div class="container">
-      <h1 class="heading1"><span class="maintext">Sản Phẩm Khác</span><span class="subtext"> See Our Most featured Products</span></h1>
-      <ul class="thumbnails">
-        <% product.forEach(function(pro){ %>
+  </div>
+</section>
 
-            <li class="span3">
-              <a class="prdocutname" href="product.html"> <%= pro.name %> </a>
-              <div class="thumbnail">
-                <span class="sale tooltip-test">Sale</span>
-                <a href="/chi-tiet/<%= pro.nameKhongDau%>.<%= pro._id%>.<%= pro.placeId%>.html"><img alt="" src="upload/<%= pro.img %>"></a>
-                <div class="pricetag">
-                  <span class="spiral"></span><a href="/add-cart.<%= pro._id %>" class="productcart">ADD TO CART</a>
-                  <div class="price">
-                    <div class="pricenew"><%= pro.price %></div>
-                  </div>
-                </div>
-              </div>
-            </li>
-      <% })%>
 
-        
-      </ul>
-    </div>
-  </section>
-  <!-- Popular Brands-->
-</div>
+
+
+<br>
+<br>
+<br> <br>
+<br>
+<br> <br>
+<br>
+<br>
+
+
 
 <!-- Footer -->
+
 <% include ../layout/footer.ejs %>
+
+
+
+
+
+
+<style>
+  /* Basic Styling */
+
+
+  .container {
+
+    margin: 0 auto;
+
+    display: flex;
+  }
+
+  /* Columns */
+  .left-column {
+    width: 900px;
+    position: relative;
+  }
+
+  .right-column {
+    width: 500px;
+    margin-top: 60px;
+  }
+
+
+  /* Left Column */
+  .left-column img {
+    width: 680px;
+    height: 500px;
+
+    transition: all 0.3s ease;
+
+  }
+
+  .left-column img.active {
+    opacity: 1;
+  }
+
+
+  /* Right Column */
+
+  /* Product Description */
+  .product-description {
+    border-bottom: 1px solid #E1E8EE;
+    margin-bottom: 20px;
+  }
+
+  .product-description span {
+    font-size: 12px;
+    color: #358ED7;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+
+  .product-description h1 {
+    font-weight: 300;
+    font-size: 52px;
+    color: #43484D;
+    letter-spacing: -2px;
+  }
+
+  .product-description p {
+    font-size: 16px;
+    font-weight: 300;
+    color: #86939E;
+    line-height: 24px;
+  }
+
+  /* Product Price */
+  .product-price {
+    display: flex;
+    align-items: center;
+  }
+
+  .product-price span {
+    font-size: 26px;
+    font-weight: 300;
+    color: #43474D;
+    margin-right: 20px;
+  }
+
+  .cart-btn {
+    display: inline-block;
+    background-color: #7DC855;
+    border-radius: 6px;
+    font-size: 16px;
+    color: #FFFFFF;
+    text-decoration: none;
+    padding: 12px 30px;
+    transition: all .5s;
+  }
+
+  .cart-btn:hover {
+    background-color: #64af3d;
+  }
+
+  /* Responsive */
+  @media (max-width: 940px) {
+    .container {
+      flex-direction: column;
+      margin-top: 60px;
+    }
+
+    .left-column,
+    .right-column {
+      width: 100%;
+    }
+
+    .left-column img {
+      width: 300px;
+      right: 0;
+      top: -65px;
+      left: initial;
+    }
+  }
+
+  @media (max-width: 535px) {
+    .left-column img {
+      width: 220px;
+      top: -85px;
+    }
+  }
+</style>

@@ -19,7 +19,7 @@ var countJson = function(json){
 // Welcome Page
 // router.get('/', forwardAuthenticated, (req, res) => res.render('welcome'));
 /* GET home page. */
-router.get('/', ensureAuthenticated, function (req, res) {
+router.get('/', function (req, res) {
 	Product.find().then(function(product){
 		Place.find().then(function(place){
 			res.render('site/page/index',{product: product, place: place});

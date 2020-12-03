@@ -1,62 +1,91 @@
 
-<div class="row mt-5">
-  <div class="col-md-6 m-auto">
-    <div class="card card-body">
-      <h1 class="text-center mb-3">
-        <i class="fas fa-user-plus"></i> Register
-      </h1>
-      <% include ./partials/messages %>
-      <form action="/users/site/page/register" method="POST">
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input
-            type="name"
-            id="name"
-            name="name"
-            class="form-control"
-            placeholder="Enter Name"
-            value="<%= typeof name != 'undefined' ? name : '' %>"
-          />
-        </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            class="form-control"
-            placeholder="Enter Email"
-            value="<%= typeof email != 'undefined' ? email : '' %>"
-          />
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            class="form-control"
-            placeholder="Create Password"
-            value="<%= typeof password != 'undefined' ? password : '' %>"
-          />
-        </div>
-        <div class="form-group">
-          <label for="password2">Confirm Password</label>
-          <input
-            type="password"
-            id="password2"
-            name="password2"
-            class="form-control"
-            placeholder="Confirm Password"
-            value="<%= typeof password2 != 'undefined' ? password2 : '' %>"
-          />
-        </div>
-        <button type="submit" class="btn btn-primary btn-block">
-          Register
-        </button>
-      </form>
-      <p class="lead mt-4">Have An Account? <a href="/users/site/page/login">Login</a></p>
-    </div>
-  </div>
-</div>
 
+
+
+
+<form class="box" action="/users/site/page/register" method="POST">
+  <h1>Register</h1>
+  <input type="name" id="name" name="name" class="form-control" placeholder="Enter Name"
+    value="<%= typeof name != 'undefined' ? name : '' %>" />
+  <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email"
+    value="<%= typeof email != 'undefined' ? email : '' %>" />
+  <input type="password" id="password" name="password" class="form-control" placeholder="Create Password"
+    value="<%= typeof password != 'undefined' ? password : '' %>" />
+  <input type="password" id="password2" name="password2" class="form-control" placeholder="Confirm Password"
+    value="<%= typeof password2 != 'undefined' ? password2 : '' %>" />
+  <input type="submit" name="" value="Register">
+  <p class="question">
+    Have An Account ? <a href="/users/site/page/login">Login</a>
+  </p>
+</form>
+
+
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background: black;
+  }
+
+  .box {
+    width: 300px;
+    padding: 40px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #191919;
+    text-align: center;
+  }
+
+  .box h1 {
+    color: white;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .box input[type="name"],
+  .box input[type="email"],
+  .box input[type="password"] {
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #3498db;
+    padding: 14px 10px;
+    width: 200px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+  }
+  .box input[type="name"]:focus,
+  .box input[type="email"]:focus,
+  .box input[type="password"]:focus {
+    width: 280px;
+    border-color: #2ecc71;
+  }
+
+  .box input[type="submit"] {
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #2ecc71;
+    padding: 14px 40px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+    cursor: pointer;
+  }
+
+  .box input[type="submit"]:hover {
+    background: #2ecc71;
+  }
+  .question{
+    color: white;
+  }
+</style>
