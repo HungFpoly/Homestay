@@ -32,18 +32,18 @@ var Place = require('../model/place');
 var Product = require('../model/Product.js');
 
 /* GET home page. */
-router.get('/',function (req, res) {
+router.get('/',checkAdmin,function (req, res) {
 	res.redirect('/admin/product/danh-sach.html')
 });
 
-router.get('/danh-sach.html',function (req, res) {
+router.get('/danh-sach.html',checkAdmin,function (req, res) {
 	
 	Product.find().then(function(pro){
 		res.render('admin/product/danhsach', {product: pro});
 	});
 });
 
-router.get('/them-product.html',function (req, res) {
+router.get('/them-product.html',checkAdmin,function (req, res) {
 	Place.find().then(function(place){
 		res.render('admin/product/them',{errors: null, place: place});
 	});
@@ -85,7 +85,7 @@ router.post('/them-product.html',upload.single('hinh'), function (req, res) {
 	}
 });
 
-router.get('/:id/sua-product.html', function (req, res) {
+router.get('/:id/sua-product.html', checkAdmin,function (req, res) {
 	Product.findById(req.params.id).then(function(data){
 		Place.find().then(function(place){
 			res.render('admin/product/sua',{errors: null, place: place, product: data});
@@ -145,7 +145,7 @@ router.post('/:id/sua-product.html',  upload.single('hinh'), function (req, res)
 	
 });
 
-router.get('/:id/xoa-product.html', function (req, res) {
+router.get('/:id/xoa-product.html',checkAdmin, function (req, res) {
 	// Product.findById(req.params.id).remove(function() {
 	// 	console.log(daa);
 	// 	req.flash('success_msg', 'Đã Xoá Thành Công');
@@ -166,13 +166,13 @@ router.get('/:id/xoa-product.html', function (req, res) {
 	
 });
 
-// function checkAdmin(req, res, next){
+function checkAdmin(req, res, next){
    
-//     if(req.isAuthenticated()){
-//       next();
-//     }else{
-//       res.redirect('/admin/dang-nhap.html');
-//     }
-// }
+    if(req.isAuthenticated()){
+      next();
+    }else{
+      res.redirect('/admin/dang-nhap.html');
+    }
+}
 
 module.exports = router;

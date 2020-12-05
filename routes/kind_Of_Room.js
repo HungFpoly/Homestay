@@ -4,18 +4,18 @@ var KindOfRoom = require('../model/kind_Of_Room');
 
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', checkAdmin,function(req, res, next) {
   res.redirect('/admin/kindOfRoom/danh-sach.html'); 
 });
 
-router.get('/danh-sach.html', function(req, res, next) {
+router.get('/danh-sach.html', checkAdmin,function(req, res, next) {
 	 KindOfRoom.find().then(function(data){
 		res.render('admin/kindOfRoom/danhsach', {data: data});
 	});
   	
 });
 
-router.get('/them-kindOfRoom.html', function(req, res, next) {
+router.get('/them-kindOfRoom.html', checkAdmin,function(req, res, next) {
   res.render('admin/kindOfRoom/them', { errors: null});
 });
 
@@ -41,7 +41,7 @@ router.post('/them-kindOfRoom.html', function(req, res, next) {
 
 });
 
-router.get('/:id/sua-kindOfRoom.html', function(req, res, next) {
+router.get('/:id/sua-kindOfRoom.html',checkAdmin, function(req, res, next) {
 	KindOfRoom.findById(req.params.id, function(err, data){
 		res.render('admin/kindOfRoom/sua',{ errors: null, data: data});
 	});	
@@ -66,7 +66,7 @@ router.post('/:id/sua-kindOfRoom.html', function(req, res, next) {
 
 });
 
-router.get('/:id/xoa-kindOfRoom.html',  function(req, res, next) {
+router.get('/:id/xoa-kindOfRoom.html', checkAdmin, function(req, res, next) {
 	
 	KindOfRoom.findById(req.params.id).remove(function() { 
 		req.flash('success_msg', 'Đã Xoá Thành Công');
@@ -74,12 +74,12 @@ router.get('/:id/xoa-kindOfRoom.html',  function(req, res, next) {
 	});
 });
 
-// function checkAdmin(req, res, next){
+function checkAdmin(req, res, next){
    
-//     if(req.isAuthenticated()){
-//       next();
-//     }else{
-//       res.redirect('/admin/dang-nhap.html');
-//     }
-// }
+    if(req.isAuthenticated()){
+      next();
+    }else{
+      res.redirect('/admin/dang-nhap.html');
+    }
+}
 module.exports = router;

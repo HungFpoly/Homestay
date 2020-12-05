@@ -5,6 +5,7 @@ const passport = require('passport');
 // Load User model
 const User = require('../model/User');
 const { forwardAuthenticated } = require('../middleware/auth');
+const { json } = require('body-parser');
 
 // Login Page
 router.get('/site/page/login', forwardAuthenticated, (req, res) => res.render('site/page/login'));
@@ -91,5 +92,24 @@ router.get('/logout', (req, res) => {
   req.flash('success_msg', 'You are logged out');
   res.redirect('/users/site/page/login');
 });
+
+// router.post('/addUser', (req, res)=> {
+//   let admin = new User({
+//     name: req.body.name,
+//     email: req.body.email,
+//     password: req.body.password,
+//     date: req.body.date,
+
+//   });
+//   admin.save(function(err){
+//     if(err) {
+//       res.json({ kq:0 });
+//     } else {
+//       res.json(admin);
+
+//     }
+//   });
+// });
+
 
 module.exports = router;

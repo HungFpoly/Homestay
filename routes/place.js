@@ -18,18 +18,18 @@ function bodauTiengViet(str) {
 }
 
 /* GET home page. */
-router.get('/',function(req, res, next) {
+router.get('/',checkAdmin,function(req, res, next) {
   res.redirect('/admin/place/danh-sach.html'); 
 });
 
-router.get('/danh-sach.html', function(req, res, next) {
+router.get('/danh-sach.html',checkAdmin, function(req, res, next) {
 	 Place.find().then(function(data){
 		res.render('admin/place/danhsach', {data: data});
 	});
   	
 });
 
-router.get('/them-place.html',function(req, res, next) {
+router.get('/them-place.html',checkAdmin,function(req, res, next) {
   res.render('admin/place/them', { errors: null});
 });
 
@@ -57,7 +57,7 @@ router.post('/them-place.html', function(req, res, next) {
 });
 
 
-router.get('/:id/sua-place.html', function(req, res, next) {
+router.get('/:id/sua-place.html',checkAdmin, function(req, res, next) {
 	Place.findById(req.params.id, function(err, data){
 		res.render('admin/place/sua',{ errors: null, data: data});
 	});	
@@ -91,12 +91,12 @@ router.get('/:id/xoa-place.html',function(req, res, next) {
 	});
 });
 
-// function checkAdmin(req, res, next){
+function checkAdmin(req, res, next){
    
-//     if(req.isAuthenticated()){
-//       next();
-//     }else{
-//       res.redirect('/admin/dang-nhap.html');
-//     }
-// }
+    if(req.isAuthenticated()){
+      next();
+    }else{
+      res.redirect('/admin/dang-nhap.html');
+    }
+}
 module.exports = router;

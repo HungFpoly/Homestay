@@ -4,11 +4,11 @@ var router = express.Router();
 var Cart = require('../model/Cart.js');
 
 
-router.get('/', function(req, res, next) {
+router.get('/',checkAdmin, function(req, res, next) {
   res.redirect('/admin/cart/danh-sach.html');
 });
 
-router.get('/danh-sach.html',function(req, res, next) {
+router.get('/danh-sach.html',checkAdmin,function(req, res, next) {
 	Cart.find().then(function(data){
 		 res.render('admin/cart/danhsach', {data: data});
 	});
@@ -16,14 +16,14 @@ router.get('/danh-sach.html',function(req, res, next) {
 });
 
 
-router.get('/:id/xem-cart.html', function(req, res, next) {
+router.get('/:id/xem-cart.html',checkAdmin, function(req, res, next) {
  	var id = req.params.id;
  	Cart.findById(id).then(function(data){
 		 res.render('admin/cart/view', {cart: data});
 	});
 });
 
-router.get('/:id/thanh-toan-cart.html',function(req, res, next) {
+router.get('/:id/thanh-toan-cart.html',checkAdmin,function(req, res, next) {
  	var id = req.params.id;
  	Cart.findById(id, function(err, data){
  		data.st = 1;
@@ -35,7 +35,7 @@ router.get('/:id/thanh-toan-cart.html',function(req, res, next) {
 });
 
 
-router.get('/:id/xoa-cart.html',function(req, res, next) {
+router.get('/:id/xoa-cart.html',checkAdmin,function(req, res, next) {
  	var id = req.params.id;
  	Cart.findOneAndRemove({_id: id}, function(err, offer){
  		req.flash('success_msg', 'Đã Xoa Thành Công');
@@ -43,14 +43,14 @@ router.get('/:id/xoa-cart.html',function(req, res, next) {
  	});
 });
 
-// function checkAdmin(req, res, next){
+function checkAdmin(req, res, next){
    
-//     if(req.isAuthenticated()){
-//       next();
-//     }else{
-//       res.redirect('/admin/dang-nhap.html');
-//     }
-// }
+    if(req.isAuthenticated()){
+      next();
+    }else{
+      res.redirect('/admin/dang-nhap.html');
+    }
+}
 
 
 

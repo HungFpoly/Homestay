@@ -11,6 +11,18 @@
         </li>
         <li class="active"> Contact</li>
       </ul>
+      <% if(success_msg != ''){ %>
+      <div class=""><%= success_msg%></div>
+      <% } %>
+      <% if(errors) { %>
+      <div class="">
+        <% errors.forEach(function(e){ %>
+
+        <%= e.msg %> <br />
+        <%});%>
+
+      </div>
+      <% };%>
       <div class="send-message">
         <div class="container">
           <div class="row">
