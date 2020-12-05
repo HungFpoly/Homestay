@@ -76,6 +76,7 @@ router.post('/them-product.html',upload.single('hinh'), function (req, res) {
 			des 			: req.body.des,
 			price 			: req.body.gia,
 			st 				: 0,
+			kindId          : req.body.kindId
 		});
 
 		pro.save().then(function(){
@@ -132,6 +133,7 @@ router.post('/:id/sua-product.html',  upload.single('hinh'), function (req, res)
 			data.des 			= req.body.des;
 			data.price 			= req.body.gia;
 			data.st 			= '0';
+			data.kindId         = req.body.kindId;
 
 			data.save();
 				req.flash('success_msg', 'Đã Sửa Thành Công');

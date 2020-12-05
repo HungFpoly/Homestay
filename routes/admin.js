@@ -25,7 +25,7 @@ function bodauTiengViet(str) {
 }
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', checkAdmin,function(req, res, next) {
   res.render('admin/main/index');
 });
 
@@ -80,23 +80,23 @@ passport.deserializeUser(function(id, done) {
 
 
 
-router.post('/getUser', function (req, res) {
+router.post('/getUser', checkAdmin,function (req, res) {
     res.json(req.user);
 });
 
-router.get('/dang-xuat.html', function (req, res) {
+router.get('/dang-xuat.html', checkAdmin, function (req, res) {
     req.logout();
     res.redirect('/admin/dang-nhap.html');
 });
 
 
-// function checkAdmin(req, res, next){
+function checkAdmin(req, res, next){
    
-//     if(req.isAuthenticated()){
-//       next();
-//     }else{
-//       res.redirect('/admin/dang-nhap.html');
-//     }
-// }
+    if(req.isAuthenticated()){
+      next();
+    }else{
+      res.redirect('/admin/dang-nhap.html');
+    }
+}
 
 module.exports = router;

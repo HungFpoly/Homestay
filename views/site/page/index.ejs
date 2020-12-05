@@ -13,8 +13,7 @@
 				<div class="section-heading">
 				
 					<h3 ><span class=""> <%= ca.name%> </span><span class="text" >đi du lịch cùng bạn </span></h3>
-          
-					<a href="danh-sach.html">view all homestays <i class="fa fa-angle-right"></i></a>
+					<a href="/place/<%= ca.nameKhongDau %>.<%= ca._id%>.html">view all homestays <i class="fa fa-angle-right"></i></a>
 				</div>
 			</div>
 			<%  product.forEach(function(pro){ if(id < 6) { if(pro.placeId == ca._id){ id ++ ; %>

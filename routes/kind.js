@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var KindOfRoom = require('../model/kind_Of_Room');
+var Kind = require('../model/kind');
 
 
 /* GET home page. */
@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/danh-sach.html', function(req, res, next) {
-	 KindOfRoom.find().then(function(data){
+	Kind.find().then(function(data){
 		res.render('admin/kindOfRoom/danhsach', {data: data});
 	});
   	
@@ -22,18 +22,18 @@ router.get('/them-kindOfRoom.html', function(req, res, next) {
 
 router.post('/them-kindOfRoom.html', function(req, res, next) {
 	
-  req.checkBody('Kind_Of_Room', 'Giá Trị không được rổng').notEmpty();
-  req.checkBody('Kind_Of_Room', 'Name 5 đến 32 ký tự').isLength({min:3, max:32});
+  req.checkBody('kind', 'Giá Trị không được rổng').notEmpty();
+  req.checkBody('kind', 'Name 5 đến 32 ký tự').isLength({min:3, max:32});
   var errors = req.validationErrors();
 	if (errors) {
 	  res.render('admin/kindOfRoom/them',{errors : errors}); 
 	}
 
-	var kindOfRoom = new KindOfRoom({
-		Kind_Of_Room  : req.body.Kind_Of_Room,
+	var kind= new Kind({
+		kind  : req.body.kind,
 	});
 
-	kindOfRoom.save().then(function(){
+	kind.save().then(function(){
 		req.flash('success_msg', 'Đã Thêm Thành Công');
 		res.redirect('/admin/kindOfRoom/them-kindOfRoom.html'); 
 	});
@@ -42,22 +42,22 @@ router.post('/them-kindOfRoom.html', function(req, res, next) {
 });
 
 router.get('/:id/sua-kindOfRoom.html', function(req, res, next) {
-	KindOfRoom.findById(req.params.id, function(err, data){
+	Kind.findById(req.params.id, function(err, data){
 		res.render('admin/kindOfRoom/sua',{ errors: null, data: data});
 	});	
 });
 
 router.post('/:id/sua-kindOfRoom.html', function(req, res, next) {
-	req.checkBody('Kind_Of_Room', 'Giá Trị không được rổng').notEmpty();
-	req.checkBody('Kind_Of_Room', 'Name 5 đến 32 ký tự').isLength({min:3, max:32});
+	req.checkBody('kind', 'Giá Trị không được rổng').notEmpty();
+	req.checkBody('kind', 'Name 5 đến 32 ký tự').isLength({min:3, max:32});
   	var errors = req.getValidationResult();
   	if(errors){
-  		KindOfRoom.findById(req.params.id, function(err, data){
+		Kind.findById(req.params.id, function(err, data){
 			res.render('admin/kindOfRoom/sua',{ errors: errors, data: data});
 		});	
   	}else{
-  		KindOfRoom.findById(req.params.id, function(err, data){
-			data.Kind_Of_Room = req.body.Kind_Of_Room;
+		Kind.findById(req.params.id, function(err, data){
+			data.kind = req.body.kind;
 			data.save();
 			req.flash('success_msg', 'Đã Sửa Thành Công');
 			res.redirect('/admin/kindOfRoom/'+req.params.id+'/sua-kindOfRoom.html');
@@ -68,7 +68,7 @@ router.post('/:id/sua-kindOfRoom.html', function(req, res, next) {
 
 router.get('/:id/xoa-kindOfRoom.html',  function(req, res, next) {
 	
-	KindOfRoom.findById(req.params.id).remove(function() { 
+	Kind.findById(req.params.id).remove(function() { 
 		req.flash('success_msg', 'Đã Xoá Thành Công');
 		res.redirect('/admin/kindOfRoom/danh-sach.html');
 	});
