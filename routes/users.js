@@ -8,6 +8,7 @@ const { forwardAuthenticated } = require('../middleware/auth');
 
 // Login Page
 router.get('/site/page/login', forwardAuthenticated, (req, res) => res.render('site/page/login'));
+router.get('/site/page/account', forwardAuthenticated, (req, res) => res.render('site/page/account'));
 
 // Register Page
 router.get('/site/page/register', forwardAuthenticated, (req, res) => res.render('site/page/register'));

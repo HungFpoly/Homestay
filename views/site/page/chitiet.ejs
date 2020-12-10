@@ -20,43 +20,36 @@
 
     <!-- Product Description -->
     <div class="product-description">
-      <span>Homestay</span>
-      <h1><%= data.name%> </h1>
+     <span><h2>Homestay</h2></span> 
+      <h3><%= data.name%> </h3>
       <br>
-      <h1><%= data.kindId%></h1>
+      <h3><%= data.kindId%></h3>
       <br>
-      <p><%= data.des%></p>
+      <h3><%= data.address%></h3>
+      <br>
+      <h4>
+        <%= data.des%>
+      </h4>
     </div>
 
     <br>
 
     <!-- Product Configuration -->
     <div class="product-configuration">
-
-
       <div class="product-price">
         <span><%= data.price%>$</span>
         <a class="cart-btn" href="/add-cart.<%= data._id %>">Book Now</a>
         <span>Comment</span>
-        <a class="cart-btn" href="/comments/site/page/comment">Comment</a>
+        <a class="cart-btn" href="/site/page/comment">Comment</a>
       </div>
     </div>
   </div>
 
 </main>
-
-
-
-<br>
-<br>
-<br>
-
 <section id="related" class="row">
 
   <div class="container">
     <h3><span class="">Sản Phẩm Khác</span></h3>
-
-
     <div class="latest-products">
       <div class="container">
         <div class="row">

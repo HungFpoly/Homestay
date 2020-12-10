@@ -48,7 +48,7 @@ router.get('/chi-tiet/:name.:id.:place.html', function (req, res) {
 
 
 
-router.post('/dat-hang.html',ensureAuthenticated, function (req, res) {
+router.post('/dat-phong.html',ensureAuthenticated, function (req, res) {
 	var giohang = new GioHang( (req.session.cart) ? req.session.cart : {items: {}} );
 	var data = giohang.convertArray();
 	
@@ -70,7 +70,7 @@ router.post('/dat-hang.html',ensureAuthenticated, function (req, res) {
 
 
 
-router.get('/dat-hang.html',ensureAuthenticated, function (req, res) {
+router.get('/dat-phong.html',ensureAuthenticated, function (req, res) {
 	var giohang = new GioHang( (req.session.cart) ? req.session.cart : {items: {}} );
 	//var data = giohang.convertArray();
 	
@@ -102,13 +102,13 @@ router.get('/add-cart.:id', function (req, res) {
 	Product.findById(id).then(function(data){
 		giohang.add(id, data);
 		req.session.cart = giohang;
-		res.redirect('/gio-hang.html');
+		res.redirect('/book-now.html');
 	});
 
    
 });
 
-router.get('/gio-hang.html', function (req, res) {
+router.get('/book-now.html', function (req, res) {
 	var giohang = new GioHang( (req.session.cart) ? req.session.cart : {items: {}} );
 	var data = giohang.convertArray();
 

@@ -10,7 +10,9 @@ var Product = new Schema({
   des 			    : String,
   price 		    : Number,
   st 			      : Number,
+  address       : String,
   kindId        : String,
+  address       : Array,
   comment: {
     total: {
       type: Number,

@@ -75,6 +75,7 @@ app.use(passport.session());
 
 app.use(flash());
 app.use(function(req, res, next){
+  res.locals.login = req.isAuthenticated();
 	res.locals.success_msg = req.flash('success_msg');
 	res.locals.error_msg = req.flash('error_msg');
 	res.locals.error = req.flash('error');
@@ -93,7 +94,6 @@ app.use('/admin/place', place);
 app.use('/admin/product', product);
 app.use('/admin/cart', cart);
 app.use('/admin/kindOfRoom', kind );
-app.use('/comments', comment);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -17,7 +17,7 @@ router.get('/danh-sach.html',function(req, res, next) {
 
 
 router.get('/:id/xem-cart.html', function(req, res, next) {
- 	var id = req.params.id;
+	 var id = req.params.id;
  	Cart.findById(id).then(function(data){
 		 res.render('admin/cart/view', {cart: data});
 	});

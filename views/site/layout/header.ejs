@@ -70,15 +70,25 @@
                         <li class="nav-item">
                             <a class="nav-link" href="">Contact Us</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="users/logout">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="users/Logout">Logout</a>
-                        </li>
-
-
-
+                            <div class="tt-desctop-parent-account tt-parent-box">
+                                <div class="tt-account tt-dropdown-obj">
+                                    <div class="tt-dropdown-menu">
+                                        <div class="tt-dropdown-inner">
+                                            <ul>
+                                                    <%if (login ) { %>
+                                                        <li><style color:while;></style> chào !!! <%= user%></li>
+                                                        <li><a href="/users/logout"></i>Đăng xuất</a></li>
+                                                        <% }else{ %>   
+                                                        <li><a href="/users/site/page/login"></i>Đăng nhập</a></li>
+                                                
+                                                <li><a href="/users/site/page/register"></i>Đăng ký</a></li>
+                                                        <% } %>
+                                                
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                     </ul>
                 </div>
             </div>

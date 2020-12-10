@@ -8,8 +8,8 @@ var Cart = new Schema({
   sdt 		: String,
   msg 		: String,
   cart 		: Object,
-  dayIn     : Date,
-  dayOut     : Date,
+  dayIn   : {type: Date, default: Date.now()},
+  dayOut  :{type: Date, default: Date.now()},
   st 		: Number
 
 },{collection : 'cart'});
