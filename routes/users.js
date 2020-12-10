@@ -7,12 +7,22 @@ const User = require('../model/User');
 const { forwardAuthenticated } = require('../middleware/auth');
 const { json } = require('body-parser');
 
+
 // Login Page
 router.get('/site/page/login', forwardAuthenticated, (req, res) => res.render('site/page/login'));
 
 // Register Page
 router.get('/site/page/register', forwardAuthenticated, (req, res) => res.render('site/page/register'));
-
+/* GET home page. */
+router.get('/',function(req, res, next) {
+  res.redirect('/admin/users/danh-sach.html'); 
+});
+router.get('/danh-sach.html', function(req, res, next) {
+  User.find().then(function(data){
+   res.render('admin/users/danhsach', {data: data});
+ });
+   
+});
 // Register
 router.post('/site/page/register', (req, res) => {
   const { name, email, password, password2 } = req.body;
@@ -76,7 +86,14 @@ router.post('/site/page/register', (req, res) => {
     });
   }
 });
-
+//remove user
+router.get('/:id/xoa-user.html',function(req, res, next) {
+	
+	User.findById(req.params.id).remove(function() { 
+		req.flash('success_msg', 'Đã Xoá Thành Công');
+		res.redirect('/admin/users/danh-sach.html');
+	});
+});
 // Login
 router.post('/site/page/login', (req, res, next) => {
   passport.authenticate('local', {

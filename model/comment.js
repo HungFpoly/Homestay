@@ -2,16 +2,8 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 mongoose.Promise = global.Promise;
 
-var Product = new Schema({
-  name 		    	:  String,
-  nameKhongDau	: String,
-  img 		    	: String,
-  placeId 	   	: String,
-  des 			    : String,
-  price 		    : Number,
-
-  st 			      : Number,
-  kindId        : String,
+var newComment = new Schema({
+  productId: String,
   comment: {
     total: {
       type: Number,
@@ -41,6 +33,6 @@ var Product = new Schema({
   }
 
 
-},{collection : 'product'});
+},{collection : 'newComment'});
 
-module.exports = mongoose.model('Product', Product);
+module.exports = mongoose.model('newComment', newComment);

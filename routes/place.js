@@ -29,6 +29,8 @@ router.get('/danh-sach.html',checkAdmin, function(req, res, next) {
   	
 });
 
+
+
 router.get('/them-place.html',checkAdmin,function(req, res, next) {
   res.render('admin/place/them', { errors: null});
 });

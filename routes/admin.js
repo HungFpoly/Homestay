@@ -32,15 +32,9 @@ router.get('/',checkAdmin, function(req, res, next) {
 router.get('/dang-nhap.html', function(req, res, next) {
   res.render('admin/login/index');
 });
-router.get('/us-profile.html', function(req, res, next) {
-  res.render('admin/playout/view');
-});
 
-router.post('/us-profile.html',
-  passport.authenticate('local', { successRedirect: '/admin',
-                                   failureRedirect: '/admin/us-profile.html',
-                                   failureFlash: true })
-);
+
+
 
 
 router.post('/dang-nhap.html',
@@ -87,7 +81,7 @@ passport.deserializeUser(function(id, done) {
 
 
 
-router.post('/getUser', function (req, res) {
+router.post('/getUser', checkAdmin,function (req, res) {
     res.json(req.user);
 });
 
@@ -95,7 +89,6 @@ router.get('/dang-xuat.html',checkAdmin, function (req, res) {
     req.logout();
     res.redirect('/admin/dang-nhap.html');
 });
-
 
 
 function checkAdmin(req, res, next){

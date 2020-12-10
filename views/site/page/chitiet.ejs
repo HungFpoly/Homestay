@@ -23,8 +23,11 @@
       <span>Homestay</span>
       <h1><%= data.name%> </h1>
       <br>
+      <h1><%= data.kindId%></h1>
+      <br>
       <p><%= data.des%></p>
     </div>
+
     <br>
 
     <!-- Product Configuration -->
@@ -34,6 +37,8 @@
       <div class="product-price">
         <span><%= data.price%>$</span>
         <a class="cart-btn" href="/add-cart.<%= data._id %>">Book Now</a>
+        <span>Comment</span>
+        <a class="cart-btn" href="/comments/site/page/comment">Comment</a>
       </div>
     </div>
   </div>
