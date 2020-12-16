@@ -1,8 +1,8 @@
+var passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcryptjs');
-
 // Load User model
-const User = require('../models/User');
+const User = require('../model/User');
 
 module.exports = function(passport) {
   passport.use(
@@ -27,7 +27,6 @@ module.exports = function(passport) {
       });
     })
   );
-
   passport.serializeUser(function(user, done) {
     done(null, user.id);
   });

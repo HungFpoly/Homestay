@@ -12,36 +12,8 @@ var Product = new Schema({
   st 			      : Number,
   address       : String,
   kindId        : String,
-  address       : Array,
-  comment: {
-    total: {
-      type: Number,
-      require: false,
-      default: 0
-    },
-    items: [
-      {
-        title: {
-          type: String
-        },
-        content: {
-          type: String
-        },
-        name: {
-          type: String
-        },
-        date: {
-          type: Date,
-          default: Date.now
-        },
-        star: {
-          type: Number
-        }
-      }
-    ]
-  }
-
-
+  address       : Array, 
+  comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }]
 },{collection : 'product'});
 
 module.exports = mongoose.model('Product', Product);

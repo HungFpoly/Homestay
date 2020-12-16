@@ -1,38 +1,17 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-mongoose.Promise = global.Promise;
+let mongoose = require('mongoose');
+let Schema = mongoose.Schema;
 
-var newComment = new Schema({
-  productId: String,
-  comment: {
-    total: {
-      type: Number,
-      require: false,
-      default: 0
+let commentSchema = new Schema({
+    content: {
+        type: String,
+        required: true
     },
-    items: [
-      {
-        title: {
-          type: String
-        },
-        content: {
-          type: String
-        },
-        name: {
-          type: String
-        },
-        date: {
-          type: Date,
-          default: Date.now
-        },
-        star: {
-          type: Number
-        }
-      }
-    ]
-  }
+    author: String,
+    productId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Article',
+        required: true
+    }
+},{timestamps: true});
 
-
-},{collection : 'newComment'});
-
-module.exports = mongoose.model('newComment', newComment);
+module.exports = mongoose.model('Comment', commentSchema);

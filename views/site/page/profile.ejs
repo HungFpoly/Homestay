@@ -1,0 +1,37 @@
+<% include ../layout/header.ejs %>
+<!-- Header End -->
+<div class="tt-wrapper">
+    <h3 class="tt-title">Thông tin tài khoản</h3>
+    <div class="tt-table-responsive">
+        <table id="example" class="display table table-hover table-condensed">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Password</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% var id = 0 %>
+                <% user.forEach(function(item){ id ++%>
+                <tr>
+                    <td><%= id%></td>
+                    <td><%= item.name%></td>
+                    <td><%= item.email%></td>
+                    <td>****************</td>
+                    <td>
+                        <a href="/admin/users/<%= item._id %>/xoa-user.html">Xoá</a> | 
+                    </td>
+                </tr>
+                <%})%>
+            </tbody>
+        </table>
+    </div>
+    <a href="/account-change-info" class="btn btn-border"
+      >Thay đổi thông tin</a
+    >
+  </div>
+  <!-- Footer -->
+<% include ../layout/footer.ejs %>

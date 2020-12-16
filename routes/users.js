@@ -4,11 +4,18 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 // Load User model
 const User = require('../model/User');
-const { forwardAuthenticated } = require('../middleware/auth');
+const { forwardAuthenticated, ensureAuthenticated } = require('../middleware/auth');
 
 // Login Page
 router.get('/site/page/login', forwardAuthenticated, (req, res) => res.render('site/page/login'));
-router.get('/site/page/account', forwardAuthenticated, (req, res) => res.render('site/page/account'));
+router.get('/site/page/profile',ensureAuthenticated,function (req, res){
+  User.find().then(user => {
+    res.render("site/page/profile", {
+      user: req.user,
+      user: user
+    });
+  });
+});
 
 // Register Page
 router.get('/site/page/register', forwardAuthenticated, (req, res) => res.render('site/page/register'));
@@ -22,6 +29,7 @@ router.get('/danh-sach.html', function(req, res, next) {
  });
    
 });
+
 // Register
 router.post('/site/page/register', (req, res) => {
   const { name, email, password, password2 } = req.body;
@@ -109,4 +117,5 @@ router.get('/logout', (req, res) => {
   res.redirect('/users/site/page/login');
 });
 
-module.exports = router;
+
+module.exports = router; 

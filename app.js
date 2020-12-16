@@ -8,9 +8,19 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-var bcrypt = require('bcryptjs');
-const expressLayouts = require('express-ejs-layouts');
+const cookieSession = require('cookie-session')
 
+
+var bcrypt = require('bcryptjs');
+var salt = bcrypt.genSaltSync(10);
+var hash = bcrypt.hashSync("B4c0/\/", salt);
+
+var expressValidator = require('express-validator');
+var flash = require('connect-flash');
+var app = express();
+
+
+//router
 var index = require('./routes/index');
 var users = require('./routes/users');
 var admin = require('./routes/admin');
@@ -18,14 +28,8 @@ var place = require('./routes/place');
 var product = require('./routes/product');
 var cart = require('./routes/cart');
 var kind = require('./routes/kind');
-var comment = require('./routes/comment');
 
-var salt = bcrypt.genSaltSync(10);
-var hash = bcrypt.hashSync("B4c0/\/", salt);
 
-var expressValidator = require('express-validator');
-var flash = require('connect-flash');
-var app = express();
 
 //var upload = multer({ dest: '/public/uploads/' })
 // view engine setup
@@ -34,6 +38,8 @@ app.set('view engine', 'ejs');
 
 //Connect DB
 require('./middleware/database'); // connect database
+require('./middleware/passport');
+require('./middleware/authenticate');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -43,7 +49,30 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 //app.use(session({ secret: 'chauminhthien', resave: true, saveUninitialized: true }))
+//login with google
 
+// For an actual app you should configure this with an experation time, better keys, proxy and secure
+// app.use(cookieSession({
+//   name: 'tuto-session',
+//   keys: ['key1', 'key2']
+// }));
+app.use(session({
+  secret: 'chauminhthien',
+  resave: true,
+  key: 'user',
+  saveUninitialized: true
+
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+
+app.get('/google/callback', passport.authenticate('google', {
+successRedirect: '/',
+failureRedirect: '/users/site/page/login',
+failureFlash: true}));
 
 app.use(expressValidator({
   errorFormatter: function(param, msg, value) {
@@ -62,16 +91,8 @@ app.use(expressValidator({
   }
 }));
 
-app.use(session({
-  secret: 'chauminhthien',
-  resave: true,
-  key: 'user',
-  saveUninitialized: true
 
-}));
 
-app.use(passport.initialize());
-app.use(passport.session());
 
 app.use(flash());
 app.use(function(req, res, next){
@@ -95,6 +116,7 @@ app.use('/admin/product', product);
 app.use('/admin/cart', cart);
 app.use('/admin/kindOfRoom', kind );
 
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -112,5 +134,4 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
 module.exports = app;

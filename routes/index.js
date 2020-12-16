@@ -21,8 +21,8 @@ var countJson = function(json){
 /* GET home page. */
 router.get('/',  function (req, res) {
 	Product.find().then(function(product){
-		Place.find().then(function(place){
-			res.render('site/page/index',{product: product, place: place});
+		Place.find().then(function(place){		
+				res.render('site/page/index',{user:req.user,product: product, place: place});
 		});
 	});
    
