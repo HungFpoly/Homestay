@@ -12,6 +12,7 @@
   <div class="container">
     <div class="forms-container">
       <div class="signin-signup">
+        <% include ./partials/messages %>
         <form action="/users/site/page/login" class="sign-in-form" method="POST">
           <h2 class="title">Sign in</h2>
           <div class="input-field">
@@ -44,21 +45,25 @@
           <div class="input-field">
             <i class="fas fa-user"></i>
             <input type="name" id="name" name="name" placeholder="Username" 
+             value="<%= typeof name != 'undefined' ? name : '' %>"
             /> 
           </div>
           <div class="input-field">
             <i class="fas fa-envelope"></i>
             <input  id="email" name="email" type="email" placeholder="Email" 
+            value="<%= typeof email != 'undefined' ? email : '' %>"
            />
           </div>
           <div class="input-field">
             <i class="fas fa-lock"></i>
             <input id="password" name="password" type="password" placeholder="Password" 
+            value="<%= typeof password != 'undefined' ? password : '' %>"
         />
           </div>
           <div class="input-field">
             <i class="fas fa-lock"></i>
             <input id="password2" name="password2" type="password" placeholder="Confirm Password" 
+            value="<%= typeof password2 != 'undefined' ? password2 : '' %>"
            />
           </div>
           <input type="submit" class="btn" value="Sign up" />

@@ -9,11 +9,8 @@ const { forwardAuthenticated, ensureAuthenticated } = require('../middleware/aut
 // Login Page
 router.get('/site/page/login', forwardAuthenticated, (req, res) => res.render('site/page/login'));
 router.get('/site/page/profile',ensureAuthenticated,function (req, res){
-  User.find().then(user => {
-    res.render("site/page/profile", {
-      user: req.user,
-      user: user
-    });
+  User.find({user: req.user}).then(function(user){
+    res.render('site/page/profile', {user: req.user});
   });
 });
 
@@ -32,10 +29,10 @@ router.get('/danh-sach.html', function(req, res, next) {
 
 // Register
 router.post('/site/page/register', (req, res) => {
-  const { name, email, password, password2 } = req.body;
+  const { name, email, password, password2, phone } = req.body;
   let errors = [];
 
-  if (!name || !email || !password || !password2) {
+  if (!name || !email || !password || !password2 || ! phone) {
     errors.push({ msg: 'Please enter all fields' });
   }
 
@@ -53,7 +50,8 @@ router.post('/site/page/register', (req, res) => {
       name,
       email,
       password,
-      password2
+      password2,
+      phone
     });
   } else {
     User.findOne({ email: email }).then(user => {
@@ -64,13 +62,15 @@ router.post('/site/page/register', (req, res) => {
           name,
           email,
           password,
-          password2
+          password2,
+          phone
         });
       } else {
         const newUser = new User({
           name,
           email,
-          password
+          password,
+          phone
         });
 
         bcrypt.genSalt(10, (err, salt) => {

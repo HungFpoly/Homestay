@@ -5,6 +5,7 @@ var Place = require('../model/place');
 var Product = require('../model/Product.js');
 var GioHang = require('../model/giohang.js');
 var Cart = require('../model/Cart.js');
+var User = require('../model/User');
 
 const { ensureAuthenticated, forwardAuthenticated } = require('../middleware/auth');
 
@@ -21,13 +22,11 @@ var countJson = function(json){
 /* GET home page. */
 router.get('/',  function (req, res) {
 	Product.find().then(function(product){
-		Place.find().then(function(place){		
-				res.render('site/page/index',{user:req.user,product: product, place: place});
+		Place.find().then(function(place){	
+				res.render('site/page/index',{ user: req.user, product: product, place: place});
 		});
 	});
-   
 });
-
 router.get('/place/:name.:id.html', function (req, res) {
 
 	Product.find({placeId: req.params.id}, function(err, data){
@@ -102,13 +101,13 @@ router.get('/add-cart.:id', function (req, res) {
 	Product.findById(id).then(function(data){
 		giohang.add(id, data);
 		req.session.cart = giohang;
-		res.redirect('/book-now.html');
+		res.redirect('/gio-hang.html');
 	});
 
    
 });
 
-router.get('/book-now.html', function (req, res) {
+router.get('/gio-hang.html', function (req, res) {
 	var giohang = new GioHang( (req.session.cart) ? req.session.cart : {items: {}} );
 	var data = giohang.convertArray();
 
