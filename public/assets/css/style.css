@@ -1,33 +1,4 @@
-/*
 
-TemplateMo 558 Klassy Cafe
-
-https://templatemo.com/tm-558-klassy-cafe
-
-*/
-
-/* ---------------------------------------------
-Table of contents
-------------------------------------------------
-01. font & reset css
-02. reset
-03. global styles
-04. header
-05. banner
-06. features
-07. testimonials
-08. contact
-09. footer
-10. preloader
-11. search
-12. portfolio
-
---------------------------------------------- */
-/* 
----------------------------------------------
-font & reset css
---------------------------------------------- 
-*/
 @import url("https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900");
 /* 
 ---------------------------------------------
@@ -238,9 +209,10 @@ header
   right: 0px;
   z-index: 100;
   height: 100px;
-  -webkit-transition: all .5s ease 0s;
-  -moz-transition: all .5s ease 0s;
-  -o-transition: all .5s ease 0s;
+  -webkit-transition: all .5s ease 0s;  /* webkit ho tro cho chrom */
+  -moz-transition: all .5s ease 0s;/* moz ho tro cho firefox*/
+
+  -o-transition: all .5s ease 0s;  /* o choopera*/
   transition: all .5s ease 0s;
 }
 
@@ -257,9 +229,9 @@ header
   text-transform: uppercase;
   letter-spacing: 2px;
   float: left;
-  -webkit-transition: all 0.3s ease 0s;
-  -moz-transition: all 0.3s ease 0s;
-  -o-transition: all 0.3s ease 0s;
+  -webkit-transition: all 0.3s ease 0s;/* webkit ho tro cho chrom */
+  -moz-transition: all 0.3s ease 0s;/* moz ho tro cho firefox*/
+  -o-transition: all 0.3s ease 0s; /* o choopera*/
   transition: all 0.3s ease 0s;
 }
 .navbar-brand h2 {
@@ -940,16 +912,6 @@ ul.slick-dots {
 
 
 
-
-
-
-
-
-/* Footer */
-
-
-
-
 /* Product Page */
 .products {
 	margin-top: 100px;
@@ -1006,18 +968,6 @@ ul.slick-dots {
 	border-color: #f33f3f;
 	color: #fff;
 }
-
-
-
-
-/* Clients */
-
-
-
-
-
-
-
 
 
 /* Send Message */
@@ -1115,23 +1065,7 @@ ul.slick-dots {
 
 /* Responsive Style */
 @media (max-width: 768px) {
-	/* .banner .text-content {
-		width: 90%;
-		margin-left: 5%;
-	}
-	.banner .text-content h4 {
-		font-size: 22px;
-	}
 
-	.banner .text-content h2 {
-		font-size: 36px;
-		letter-spacing: 0.5px;
-	}
-	.banner-item-01,
-	.banner-item-02,
-	.banner-item-03 {
-		padding: 180px 0px;
-	} */
 	.page-heading .text-content h4 {
 		font-size: 22px;
 	}
