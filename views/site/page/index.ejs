@@ -1,5 +1,5 @@
 <% include ../layout/header.ejs %>
-<% include ../layout/search.ejs %>
+
 <!-- Latest Product-->
 
 <%   place.forEach(function(ca){ var id = 0; %>
@@ -13,11 +13,15 @@
 				<div class="section-heading">
 				
 					<h3 ><span class=""> <%= ca.name%> </span><span class="text" >đi du lịch cùng bạn </span></h3>
+
 					<a href="/place/<%= ca.nameKhongDau %>.<%= ca._id%>.html">view all homestays <i class="fa fa-angle-right"></i></a>
 				</div>
+				<hr>
 			</div>
-			<%  product.forEach(function(pro){ if(id < 6) { if(pro.placeId == ca._id){ id ++ ; %>
+		
 
+			<%  product.forEach(function(pro){ if(id < 6) { if(pro.placeId == ca._id){ id ++ ; %>
+				
 			<div class="col-md-4">
 			
 				<div class="product-item">

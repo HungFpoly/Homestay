@@ -1,33 +1,74 @@
-<footer>
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-4 col-xs-12">
-        <div class="right-text-content">
-          <ul class="social-icons">
-            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-lg-4">
-        <div class="logo">
-          <a href=""><img src="assets/images/home.png" alt="" width="350px" height="150px"></a>
-        </div>
-      </div>
-      <div class="col-lg-4 col-xs-12">
-        <div class="left-text-content">
-          <p>Homestay Fpoly 2018
+<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 
-            <br>Email: homestayfpoly2018@gmail.vn
-            <br>HotLine:028349298
-            <br></p>
+
+    <div class="footer">
+      <div class="footer_menu">
+         <div class="col_1">
+            <div class="title">
+              Company  
+            </div>  
+            <ul>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Contact</a></li>
+              <li><a href="#">Profile</a></li>
+              <li><a href="#">Blog</a></li>
+            </ul>
+         </div>
+         <div class="col_2">
+           <div class="title">
+              Help & Support 
+            </div>  
+            <ul>
+              <li><a href="#">Support Center</a></li>
+              <li><a href="#">FAQ</a></li>
+              <li><a href="#">Call Center</a></li>
+              <li><a href="#">Terms & Conditions</a></li>
+            </ul>
+         </div>
+         <div class="col_3">
+           <div class="title">
+              Services  
+            </div>  
+            <ul>
+              <li><a href="#">Business Consultancy</a></li>
+              <li><a href="#">Digital Marketing</a></li>
+              <li><a href="#">Market Analysis</a></li>
+              <li><a href="#">Web Development</a></li>
+            </ul>
+         </div>
+         <div class="col_4">
+           <div class="title">
+              Solutions  
+            </div>  
+            <ul>
+              <li><a href="#">Facilities Services</a></li>
+              <li><a href="#">Workplace Staffing</a></li>
+              <li><a href="#">Project Management</a></li>
+              <li><a href="#">Wordpress Management</a></li>
+            </ul>
         </div>
       </div>
-    </div>
+      <!-- <div class="partners">
+          <ul>
+              <li><a class="partner1" href="#"></a></li>
+              <li><a class="partner2" href="#"></a></li>
+              <li><a class="partner3" href="#"></a></li>
+              <li><a class="partner4" href="#"></a></li>
+              <li><a class="partner5" href="#"></a></li>  
+          </ul>
+      </div> -->
+      <div class="social_media">
+          <ul>
+              <li><a class="facebook" href="#"><i class="fab fa-facebook-f"></i></a></li>
+              <li><a class="twitter" href="#"><i class="fab fa-twitter"></i></a></li>
+              <li><a class="instagram" href="#"><i class="fab fa-instagram"></i></a></li>
+              <li><a class="whatsapp" href="#"><i class="fab fa-whatsapp"></i></a></li>
+          </ul>
+        
+      </div>
   </div>
-</footer>
+</div>
+
 
 
 <!-- Bootstrap core JavaScript -->
@@ -50,17 +91,8 @@
 <script src="js/application.js"></script>
 <script src="js/bootstrap-tooltip.js"></script>
 <script defer src="js/jquery.fancybox.js"></script>
-<!-- <script defer src="js/jquery.flexslider.js"></script>
-<script type="text/javascript" src="js/jquery.tweet.js"></script>
-<script  src="js/cloud-zoom.1.0.2.js"></script>
-<script  type="text/javascript" src="js/jquery.validate.js"></script>
-<script type="text/javascript"  src="js/jquery.carouFredSel-6.1.0-packed.js"></script>
-<script type="text/javascript"  src="js/jquery.mousewheel.min.js"></script>
-<script type="text/javascript"  src="js/jquery.touchSwipe.min.js"></script>
-<script type="text/javascript"  src="js/jquery.ba-throttle-debounce.min.js"></script>
-<script defer src="js/custom.js"></script> -->
 
-
+<script defer src="assets/js/scriptsr.js"></script>
 <script type="text/javascript">
   $(document).ready(function () {
     menu();
@@ -128,6 +160,22 @@
     );
   }
 
+  const searchBtn = document.querySelector(".search-btn");
+  const searchOverlay = document.querySelector(".search-overlay");
+  const searchPopup = document.querySelector(".search-popup");
+
+  searchBtn.addEventListener("click", () => {
+    searchOverlay.classList.add("active");
+    searchPopup.classList.add("active");
+  })
+
+
+  searchOverlay.addEventListener("click", (event) => {
+    if (event.target == searchOverlay) {
+      searchOverlay.classList.remove("active");
+      searchPopup.classList.remove("active");
+    }
+  })
 
 </script>
 
