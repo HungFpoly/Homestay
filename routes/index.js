@@ -19,6 +19,9 @@ var countJson = function(json){
 }
 // Welcome Page
 // router.get('/', forwardAuthenticated, (req, res) => res.render('welcome'));
+router.get('/site/page/account', function(req, res){
+	res.render('site/page/account');
+})
 /* GET home page. */
 router.get('/',  function (req, res) {
 	Product.find().then(function(product){
@@ -35,7 +38,37 @@ router.get('/place/:name.:id.html', function (req, res) {
 		});
 	});
 });
-
+// tìm kiếm theo tên 
+router.get("/search", function(req, res){
+    if(req.query.search) {
+        const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+        // Get all campgrounds from DB
+        Product.find({name: regex}, function(err, product){
+            Place.find().then(function(place){      
+                if(err){
+                    console.log(err);
+                } else {
+                   res.render("site/page/index",{product: product,place : place});
+                }
+             });
+        });
+         
+    } else {
+        // Get all campgrounds from DB
+        Product.find({}, function(err, product){
+            Place.find().then(function(place){      
+                if(err){
+                    console.log(err);
+                } else {
+                   res.render("site/page/index",{product:product, place : place});
+                }
+             });
+            });
+    }
+});
+function escapeRegex(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};
 router.get('/chi-tiet/:name.:id.:place.html', function (req, res) {
 	Product.findById(req.params.id).then(function(data){
 		Product.find({placeId: data.cateId, _id: {$ne: data._id}}).limit(4).then(function(pro){

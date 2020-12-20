@@ -101,6 +101,15 @@ router.get('/:id/xoa-user.html',function(req, res, next) {
 		res.redirect('/admin/users/danh-sach.html');
 	});
 });
+// change account
+router.post('/site/page/profile', function(req, res, ){
+  req.user.name= req.body.name;
+  req.user.email = req.body.email;
+  req.user.phone = req.body.phone;
+  req.user.save();
+  res.redirect("/users/site/page/profile");
+ 
+})
 // Login
 router.post('/site/page/login', (req, res, next) => {
   passport.authenticate('local', {
